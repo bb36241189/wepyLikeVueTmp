@@ -1,0 +1,46 @@
+
+<view data-wpy-evt="61-0" bind:tap="__dispatcher" class="record-record flex-vertical animate__fadeInPointFive">
+    <view wx:if="{{ step == 1 }}" data-wpy-evt="61-1" catch:tap="__dispatcher" class="rr-inner flex-vertical flex-ai-c flex-1 animate__fadeInUpBig">
+        <view data-wpy-evt="61-2" bind:tap="__dispatcher" class="rri-left-top">
+            <image src="../img/icon/close.png" class="rri-close-icon"></image>
+        </view>
+        <label style="margin-top:2%;" class="rri-hint">这里可以修改您的信息</label>
+        <view class="rri-choise-type flex-vertical flex-ai-c flex-jc-sa">
+            
+            <view style="width:366rpx;margin-topd:197rpx;" class="rri-write-annotation flex-basic flex-ai-c">
+                <input type="text" placeholder="昵称" name id value="{{ nickname }}" bindinput="__dispatcher" data-model-id="4" class="rwa-input" /></view>
+            <view class="rri-c-ww flex-basic flex-jc-sa">
+                <view data-wpy-evt="61-3" bind:tap="__dispatcher" style=" {{ 'transform:' + (\'scale(\' + (sex == 1?1.1:1) + \')\') + ';' }}" class="rri-c-wrapper flex-vertical flex-ai-c">
+                    <image src="../img/icon/icon-test_1.png" class="rri-c-item"></image>
+                    <label style="color:#db343b;" class="rri-c-text {{ [ sex == 1 ? 'shadow' : '' ] }}">男生</label>
+                </view>
+                <view data-wpy-evt="61-4" bind:tap="__dispatcher" style=" {{ 'transform:' + (\'scale(\' + (sex == 0?1.1:1) + \')\') + ';' }}" class="rri-c-wrapper flex-vertical flex-ai-c">
+                    <image src="../img/icon/icon-test.png" class="rri-c-item"></image>
+                    <label style="color:#d58f45;" class="rri-c-text {{ [ sex == 0 ? 'shadow' : '' ] }}">女生</label>
+                </view>
+            </view>
+            <picker mode="date" value="{{birthDayFormat}}" start="1047-01-01" end="2021-12-01" data-wpy-evt="61-5" bind:change="__dispatcher">
+                <view class="rri-choise-birthday flex-basic flex-jc-sb">
+                    <image src="../img/icon/birthday_cake_F.png" class="rri-calender"></image>
+                    <view class="rri-dh-text">点这里修改您的生日:{{birthDayFormat}}</view>
+                </view>
+            </picker>
+        </view>
+        <view class="rri-goto-continue flex-basic flex-jc-sb">
+            <view style="width:70rpx;" class="rri-g-c flex-vertical flex-ai-c">
+                
+            </view>
+            <view data-wpy-evt="61-6" bind:tap="__dispatcher" class="rri-ws-item flex-vertical flex-ai-c">
+                <image src="../img/icon/sure.png" class="rwi-icon"></image>
+                <label class="rwi-text">保存</label>
+            </view>
+            <view data-wpy-evt="61-7" bind:tap="__dispatcher" class="rri-g-c flex-vertical flex-ai-c">
+                <image src="../img/icon/Rightarrow.png" class="rri-gc-icon"></image>
+                <label class="rri-gc-text">跳过</label>
+            </view>
+        </view>
+    </view>
+
+
+    
+</view>

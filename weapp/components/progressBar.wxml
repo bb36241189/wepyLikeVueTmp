@@ -1,0 +1,6 @@
+
+<view class="progress-bar">
+    <view style=" {{ 'width:' + (realPercent) + ';' + 'background:' + (color) + ';' }}" class="progress-bar-inner flex-basic flex-jc-e">
+        <label class="progress-text">{{realPercent}}</label>
+    </view>
+</view>

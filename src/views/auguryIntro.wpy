@@ -1,0 +1,86 @@
+<template>
+    <div class="augury-intro">
+        <bgAnimation :externalClasses="'star-info-bg'"></bgAnimation>
+        <div class="augury-intro-content">
+            <div class="aic-section flex-vertical">
+                <span class="aic-bigtitle">测算相关声明</span>
+                <span class="aic-title">测算剩余次数</span>
+                <span class="aic-desc">&nbsp;&nbsp;测算剩余次数是指，还剩下的可以塔罗解读的次数，这个次数在每次塔罗解读的时候会产生消耗。假如次数为零，将无法进行塔罗测算。目前可以获得测算次数的唯一途径就是写日记喔~</span>
+            </div>
+            <img src="../img/icon/close.png" @tap="goBack" class="ai-close-icon"/>
+        </div>
+    </div>
+</template>
+<style lang="less" type="text/css">
+@import '../style/flex-integrate.less';
+page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.augury-intro{
+    padding-left: 30rpx;
+    padding-top: 120rpx;
+    padding-right: 30rpx;
+    height: 100%;
+    overflow-y: auto;
+}
+.star-info-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0rpx;
+  left: 0rpx;
+  right: 0rpx;
+  bottom: 0rpx;
+}
+.augury-intro-content{
+    position: relative;
+    min-height: 60%;
+    border-radius: 28rpx;
+    padding: 56rpx 28rpx;
+    background: rgba(242,241,246,0.3);
+    border: 1rpx solid #f2f1f6;
+}
+.aic-bigtitle{
+    margin: 0 auto;
+    font-size: 32rpx;
+    margin-bottom: 48rpx;
+    color: rgba(200,200,200,1);
+}
+.aic-title{
+    font-size: 28rpx;
+    margin-bottom: 68rpx;
+    color: rgba(255,255,255,1);
+}
+.aic-desc{
+    font-size: 26rpx;
+    color: rgba(200,200,200,1);
+}
+.ai-close-icon{
+    position: absolute;
+    right: 28rpx;
+    top:28rpx;
+    width: 56rpx;
+    height: 56rpx;
+}
+</style>
+<script>
+import wepy from '@wepy/core';
+import testMixin from '../mixins/test';
+wepy.component( {
+    mixins: [testMixin],
+    methods: {
+        goBack(){
+            this.$router.go(-1);
+        }
+    }
+});
+</script>
+<config>
+{
+    usingComponents: {
+        bgAnimation:'~@/components/bgAnimation.wpy'
+    }
+}
+</config>

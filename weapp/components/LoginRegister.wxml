@@ -1,0 +1,31 @@
+
+<view data-wpy-evt="24-0" bind:tap="__dispatcher" class="login-register-mask flex-basic flex-jc-c flex-ai-c">
+  
+  <bgAnimation bind_init="__initComponent" externalClasses="{{ 'star-info-bg' }}"></bgAnimation>
+  <view data-wpy-evt="24-1" catch:tap="__dispatcher" class="lrm-center">
+    <view class="lrm-title flex-vertical flex-ai-c">
+      <image wx:if="{{ star }}" src="{{ img_url + 'stard/' + star.icon }}" class="lrm-icon"></image>
+      <label class="lrm-title-text">登录</label>
+      <label class="lrm-sub-title-t">登录之后体验更佳喔~</label>
+    </view>
+    <view class="lrm-inputarea flex-vertical flex-ai-c">
+      <view class="lrmi-phone">
+        <input type="number" value="{{ phone }}" bindinput="__dispatcher" data-model-id="1" placeholder="手机号码" maxlengt="11" class="lp-input" />
+      </view>
+      <view class="lrmi-valide-code flex-basic flex-jc-sb">
+        <input type="number" value="{{ code }}" bindinput="__dispatcher" data-model-id="2" placeholder="短信验证" maxlength="6" class="lvc-intput flex-1" />
+        <view data-wpy-evt="24-2" bind:tap="__dispatcher" class="lrmi-send-btn flex-basic flex-jc-c flex-ai-c">
+          <label class="lsb-text">{{countDown > 0?countDown:'发送验证码'}}</label>
+        </view>
+      </view>
+    </view>
+    <view class="lrm-btn-wrapper flex-basic flex-jc-sa">
+      <view data-wpy-evt="24-3" bind:tap="__dispatcher" class="lb-cancel flex-basic flex-jc-c flex-ai-c">
+        <label class="lb-cancel-text">取消</label>
+      </view>
+      <view data-wpy-evt="24-4" bind:tap="__dispatcher" class="lb-text flex-basic flex-jc-c flex-ai-c">
+        <label class="lb-text-login">登录</label>
+      </view>
+    </view>
+  </view>
+</view>

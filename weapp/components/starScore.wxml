@@ -1,0 +1,9 @@
+
+<view class="star-score flex-basic flex-jc-s">
+    <view wx:for="{{ [1,2,3,4,5] }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" class="star-bar">
+        <image src="../img/star_blue.png" wx:if="{{ item <= score && color=='blue' }}" class="star-index"></image>
+        <image src="../img/star_red.png" wx:elif="{{ item <= score && color=='red' }}" class="star-index"></image>
+        <image src="../img/star_yellow.png" wx:elif="{{ item <= score && color=='yellow' }}" class="star-index"></image>
+        <image src="../img/star_gray.png" wx:elif="{{ item > score }}" class="star-index"></image>
+    </view>
+</view>

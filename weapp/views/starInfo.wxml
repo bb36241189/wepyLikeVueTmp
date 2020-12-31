@@ -1,0 +1,149 @@
+
+<view scroll-y="true" style=" {{ 'padding-top:' + ((custom.top + 30) + \'rpx\') + ';' + 'padding-bottom:' + ((custom.bottom + 114) + \'rpx\') + ';' }}" class="star-info">
+    
+    <bgAnimation bind_init="__initComponent" externalClasses="{{ 'star-info-bg' }}"></bgAnimation>
+
+    <view data-wpy-evt="43-0" bind:tap="__dispatcher" class="si-top-bar flex-vertical flex-jc-c">
+      <image src="../img/star_cloud.png" class="stb-bg"></image>
+      <view class="stb-content flex-vertical flex-jc-c">
+        <label wx:if="{{ !daySign }}" class="stb-big">心灵指引</label>
+        <label wx:if="{{ daySign }}" class="stb-sub">{{daySign.heart_guid}}>>></label>
+        <label wx:else class="stb-sub">不是心灵鸡汤啊，这里应该叫心灵指引才对！>>></label>
+      </view>
+    </view>
+    <view class="si-panel flex-vertical">
+      <view class="sip-bar flex-basic flex-ai-c flex-jc-s">
+        <view data-wpy-evt="43-1" bind:tap="__dispatcher" class="sipb-change-star flex-basic flex-jc-c flex-ai-c">
+          <image src="../img/icon/qiehuan.png" class="scs-icon"></image>
+          <text decode="true" class="scs-text">其他星座</text>
+        </view>
+        <view styled="width:300rpx;height:300rpx" class="sipb-tim-tab flex-1 flex-basic flex-jc-sa flex-ai-c">
+          <view data-wpy-evt="43-2" bind:tap="__dispatcher" class="stt-today flex-vertical flex-ai-c {{ [ nowTab == \'day\' ? 'selected' : '' ] }}">
+            <text decode="true" class="stt-text">今日</text>
+            <view class="stt-select-bar"></view>
+          </view>
+          <view data-wpy-evt="43-3" bind:tap="__dispatcher" class="stt-tomorrow flex-vertical flex-ai-c {{ [ nowTab == \'tomorrow\' ? 'selected' : '' ] }}">
+            <text decode="true" class="stt-text">明日</text>
+            <view class="stt-select-bar"></view>
+          </view>
+          <view data-wpy-evt="43-4" bind:tap="__dispatcher" class="stt-week flex-vertical flex-ai-c {{ [ nowTab == \'week\' ? 'selected' : '' ] }}">
+            <text decode="true" class="stt-text">本周</text>
+            <view class="stt-select-bar"></view>
+          </view>
+          <view data-wpy-evt="43-5" bind:tap="__dispatcher" class="stt-month flex-vertical flex-ai-c {{ [ nowTab == \'month\' ? 'selected' : '' ] }}">
+            <text decode="true" class="stt-text">本月</text>
+            <view class="stt-select-bar"></view>
+          </view>
+          <view data-wpy-evt="43-6" bind:tap="__dispatcher" class="stt-year flex-vertical flex-ai-c {{ [ nowTab == \'year\' ? 'selected' : '' ] }}">
+            <text decode="true" class="stt-text">今年</text>
+            <view class="stt-select-bar"></view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{ star && starInfo }}" class="star-notice">
+        <view class="star-notice-info">
+          <view wx:if="{{ star }}" class="star-name flex-basic flex-jc-s flex-ai-c">
+            <text decode="true" class="star-name-text">{{star.name}}</text>
+            <view class="star-time-section">{{star.time}}</view>
+          </view>
+          <starScore bind_init="__initComponent" wx:if="{{ starInfo.showapi_res_body[nowTab].summary_star >= 0 }}" score="{{ starInfo.showapi_res_body[nowTab].summary_star }}" color="yellow" style="margin-top:20rpx;"></starScore>
+          <progressBar bind_init="__initComponent" wx:else color="#f19540" percent="{{ starInfo.showapi_res_body[nowTab].general_index }}" style="margin-top:20rpx;"></progressBar>
+          <view class="star-notice-text">
+            <text decode="true" wx:if="{{ starInfo.showapi_res_body[nowTab].day_notice }}" class="snt-text">{{starInfo.showapi_res_body[nowTab].day_notice}}</text>
+            <text decode="true" wx:if="{{ starInfo.showapi_res_body[nowTab].week_notice }}" class="snt-text">{{starInfo.showapi_res_body[nowTab].week_notice}}</text>
+            <text decode="true" wx:if="{{ starInfo.showapi_res_body[nowTab].oneword }}" class="snt-text">{{starInfo.showapi_res_body[nowTab].oneword}}</text>
+            <text decode="true" wx:if="{{ starInfo.showapi_res_body[nowTab].month_advantage }}" class="snt-text">{{starInfo.showapi_res_body[nowTab].month_advantage}}</text>
+            <text decode="true" wx:if="{{ starInfo.showapi_res_body[nowTab].month_weakness }}" class="snt-text">{{starInfo.showapi_res_body[nowTab].month_weakness}}</text>
+          </view>
+        </view>
+        <image src="{{ img_url + 'stard/' + star.icon }}" class="star-notice-icon"></image>
+      </view>
+      <view wx:if="{{ star && starInfo }}" class="star-star-info flex-basic flex-jc-sb">
+        <view class="ssi-left flex-vertical">
+          <view class="ssi-item flex-basic flex-jc-s flex-ai-c">
+            <text decode="true" class="ssi-name">爱情指数&nbsp;&nbsp;</text>
+            <starScore bind_init="__initComponent" wx:if="{{ starInfo.showapi_res_body[nowTab].love_star >= 0 }}" score="{{ starInfo.showapi_res_body[nowTab].love_star }}" color="red"></starScore>
+            <progressBar bind_init="__initComponent" wx:else color="#ff5a3d" percent="{{ starInfo.showapi_res_body[nowTab].love_index }}"></progressBar>
+          </view>
+          <view class="ssi-item flex-basic flex-jc-s flex-ai-c">
+            <text decode="true" class="ssi-name">财富指数&nbsp;&nbsp;</text>
+            <starScore bind_init="__initComponent" wx:if="{{ starInfo.showapi_res_body[nowTab].money_star >= 0 }}" score="{{ starInfo.showapi_res_body[nowTab].money_star }}" color="yellow"></starScore>
+            <progressBar bind_init="__initComponent" wx:else color="#f19540" percent="{{ starInfo.showapi_res_body[nowTab].money_index }}"></progressBar>
+          </view>
+          <view class="ssi-item flex-basic flex-jc-s flex-ai-c">
+            <text decode="true" class="ssi-name">工作指数&nbsp;&nbsp;</text>
+            <starScore bind_init="__initComponent" wx:if="{{ starInfo.showapi_res_body[nowTab].work_star >= 0 }}" score="{{ starInfo.showapi_res_body[nowTab].work_star }}" color="blue"></starScore>
+            <progressBar bind_init="__initComponent" wx:else color="#6ba0f6" percent="{{ starInfo.showapi_res_body[nowTab].work_index }}"></progressBar>
+          </view>
+          <view wx:if="{{ starInfo.showapi_res_body[nowTab].grxz }}" class="ssi-item flex-basic flex-jc-s flex-ai-c">
+            <text decode="true" class="ssi-name">贵人星座&nbsp;&nbsp;</text>
+            <text decode="true" class="ssi-constellation">{{starInfo.showapi_res_body[nowTab].grxz}}</text>
+          </view>
+        </view>
+        <view class="ssi-right flex-vertical">
+          <view wx:if="{{ starInfo.showapi_res_body[nowTab].lucky_num }}" class="ssi-item flex-basic flex-jc-s">
+            <text decode="true" class="ssi-name">幸运数字&nbsp;&nbsp;</text>
+            <text decode="true" class="ssi-number">{{starInfo.showapi_res_body[nowTab].lucky_num}}</text>
+          </view>
+          <view wx:if="{{ starInfo.showapi_res_body[nowTab].lucky_num }}" class="ssi-item flex-basic flex-jc-s">
+            <text decode="true" class="ssi-name">幸运颜色&nbsp;&nbsp;</text>
+            <text decode="true" class="ssi-color">{{starInfo.showapi_res_body[nowTab].lucky_color}}</text>
+          </view>
+          <view wx:if="{{ starInfo.showapi_res_body[nowTab].lucky_direction }}" class="ssi-item flex-basic flex-jc-s">
+            <text decode="true" class="ssi-name">吉利方位&nbsp;&nbsp;</text>
+            <text decode="true" class="ssi-direction">{{starInfo.showapi_res_body[nowTab].lucky_direction}}</text>
+          </view>
+          <view wx:if="{{ starInfo.showapi_res_body[nowTab].lucky_day }}" class="ssi-item flex-basic flex-jc-s">
+            <text decode="true" class="ssi-name">幸运日期&nbsp;&nbsp;</text>
+            <text decode="true" class="ssi-color">{{starInfo.showapi_res_body[nowTab].lucky_day}}</text>
+          </view>
+          <view wx:if="{{ starInfo.showapi_res_body[nowTab].lucky_time }}" class="ssi-item flex-basic flex-jc-s">
+            <text decode="true" class="ssi-name">幸运时间&nbsp;&nbsp;</text>
+            <text decode="true" class="ssi-time">{{starInfo.showapi_res_body[nowTab].lucky_time}}</text>
+          </view>
+          <view wx:if="{{ starInfo.showapi_res_body[nowTab].yfxz }}" class="ssi-item flex-basic flex-jc-s">
+            <text decode="true" class="ssi-name">缘份星座&nbsp;&nbsp;</text>
+            <text decode="true" class="ssi-time">{{starInfo.showapi_res_body[nowTab].yfxz}}</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{ star && starInfo }}" class="si-lucky-text">
+        <view class="si-lucky-simple">
+          <view class="sil-title flex-basic flex-ai-c">
+            <image src="../img/icon/pingjia.png" class="sil-title-icon"></image>
+            <text decode="true" class="sil-title-text">运势简评</text>
+          </view>
+          <view class="sil-content">
+            <text decode="true" class="sil-content-text">{{starInfo.showapi_res_body[nowTab].general_txt}}</text>
+          </view>
+        </view>
+        <view class="si-lucky-love">
+          <view class="sil-title flex-basic flex-ai-c">
+            <image src="../img/icon/aiqingyuehui.png" class="sil-title-icon"></image>
+            <text decode="true" style="color:#d65132;" class="sil-title-text">爱情运势</text>
+          </view>
+          <view class="sil-content">
+            <text decode="true" class="sil-content-text">{{starInfo.showapi_res_body[nowTab].love_txt}}</text>
+          </view>
+        </view>
+        <view class="si-lucky-love">
+          <view class="sil-title flex-basic flex-ai-c">
+            <image src="../img/icon/gongzuo.png" class="sil-title-icon"></image>
+            <text decode="true" style="color:#4a8dfd;" class="sil-title-text">工作运势</text>
+          </view>
+          <view class="sil-content">
+            <text decode="true" class="sil-content-text">{{starInfo.showapi_res_body[nowTab].work_txt}}</text>
+          </view>
+        </view>
+        <view class="si-lucky-love">
+          <view class="sil-title flex-basic flex-ai-c">
+            <image src="../img/icon/caifu.png" class="sil-title-icon"></image>
+            <text decode="true" style="color:#fb8f23;" class="sil-title-text">财富运势</text>
+          </view>
+          <view class="sil-content">
+            <text decode="true" class="sil-content-text">{{starInfo.showapi_res_body[nowTab].money_txt}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+</view>

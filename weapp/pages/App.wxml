@@ -1,0 +1,31 @@
+
+<view class="my-app">
+  <routerView bind_init="__initComponent"></routerView>
+  <view style=" {{ 'padding-bottom:' + ((custom.bottom - 50 < 0?0:custom.bottom - 50) + \'rpx\') + ';' }}" class="star-info-bottom flex-basic flex-jc-sa flex-ai-c">
+    <view data-wpy-evt="10-0" bind:tap="__dispatcher" class="sib-item flex-vertical flex-ai-c">
+      <image src="../img/bottom/_xingzuoyuncheng2.png" wx:if="{{ nowBottomTab == 'Fortune' }}" class="sib-item-icon"></image>
+      <image src="../img/bottom/_xingzuoyuncheng.png" wx:else class="sib-item-icon"></image>
+      <label class="sib-item-text {{ [ nowBottomTab == \'Fortune\' ? 'high' : '' ] }}">运势</label>
+    </view>
+    <view data-wpy-evt="10-1" bind:tap="__dispatcher" class="sib-item flex-vertical flex-ai-c">
+      <image src="../img/bottom/kantanriji2.png" wx:if="{{ nowBottomTab == 'Diary' }}" class="sib-item-icon"></image>
+      <image src="../img/bottom/kantanriji.png" wx:else class="sib-item-icon"></image>
+      <label class="sib-item-text {{ [ nowBottomTab == \'Diary\' ? 'high' : '' ] }}">日记</label>
+    </view>
+    <view data-wpy-evt="10-2" bind:tap="__dispatcher" class="sib-item flex-vertical flex-ai-c">
+      <image src="../img/bottom/daohanglan-052.png" wx:if="{{ nowBottomTab == 'Mine' }}" class="sib-item-icon"></image>
+      <image src="../img/bottom/daohanglan-05.png" wx:else class="sib-item-icon"></image>
+      <label class="sib-item-text {{ [ nowBottomTab == \'Mine\' ? 'high' : '' ] }}">我的</label>
+    </view>
+  </view>
+   <view wx:if="{{ !showRecord }}" data-wpy-evt="10-3" bind:tap="__dispatcher" class="star-write-note flex-basic flex-jc-c flex-ai-c">
+    <image src="../img/icon/combinedshapecopy2.png" class="swn-icon"></image>
+  </view>
+  <HourMinute bind_init="__initComponent"></HourMinute>
+  <yearMonthMate></yearMonthMate>
+  <LoginRegister bind_init="__initComponent" wx:if="{{ showLogin }}" data-wpy-evt="10-4" bind:closeMask="__dispatcher"></LoginRegister>
+  <choiseStar bind_init="__initComponent" wx:if="{{ isChangingStar }}" data-wpy-evt="10-5" bind:closeMask="__dispatcher"></choiseStar>
+  
+    <record bind_init="__initComponent" d="{{ starInfo.d }}" tab="{{ nowTab }}" edit-data="{{ editData }}" wx:if="{{ showRecord }}" data-wpy-evt="10-6" bind:closeRecord="__dispatcher"></record>
+  
+</view>

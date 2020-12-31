@@ -1,0 +1,83 @@
+
+<view data-wpy-evt="23-0" bind:tap="__dispatcher" class="record-record flex-vertical animate__fadeInPointFive">
+    <view wx:if="{{ step == 1 }}" data-wpy-evt="23-1" catch:tap="__dispatcher" class="rr-inner flex-vertical flex-ai-c flex-1 animate__fadeInUpBig">
+        <view data-wpy-evt="23-2" bind:tap="__dispatcher" class="rri-left-top">
+            <image src="../img/icon/close.png" class="rri-close-icon"></image>
+        </view>
+        <label wx:if="{{ tab == 'tomorrow' }}" class="rri-hint">需要计划下明天的安排吗?</label>
+        <label wx:elif="{{ tab == 'day' }}" class="rri-hint">你今天过得好吗?</label>
+        <view class="rri-date-hint flex-basic flex-jc-c">
+            <image src="../img/icon/calender.png" class="rri-calender"></image>
+            <view wx:if="{{ tab == 'tomorrow' }}" class="rri-dh-text">明天，{{getNextDay}}</view>
+            <view wx:elif="{{ tab == 'day' }}" class="rri-dh-text">今天，{{getNowDay}}</view>
+        </view>
+        <view class="rri-choise-type flex-basic flex-jc-sb">
+            <view data-wpy-evt="23-3" bind:tap="__dispatcher" class="rri-c-wrapper flex-vertical flex-ai-c">
+                <image src="../img/icon/aiqingyuehui.png" class="rri-c-item"></image>
+                <label style="color:#db343b;" class="rri-c-text">感情</label>
+            </view>
+            <view data-wpy-evt="23-4" bind:tap="__dispatcher" class="rri-c-wrapper flex-vertical flex-ai-c">
+                <image src="../img/icon/caifu.png" class="rri-c-item"></image>
+                <label style="color:#d58f45;" class="rri-c-text">赚钱</label>
+            </view>
+            <view data-wpy-evt="23-5" bind:tap="__dispatcher" class="rri-c-wrapper flex-vertical flex-ai-c">
+                <image src="../img/icon/gongzuo.png" class="rri-c-item"></image>
+                <label style="color:#67a3d0;" class="rri-c-text">上班</label>
+            </view>
+            <view data-wpy-evt="23-6" bind:tap="__dispatcher" class="rri-c-wrapper flex-vertical flex-ai-c">
+                <image src="../img/icon/wanjufengche.png" class="rri-c-item"></image>
+                <label style="color:#8ec13a;" class="rri-c-text">消遣</label>
+            </view>
+        </view>
+        <view class="rri-goto-continue flex-basic flex-jc-e">
+            <view data-wpy-evt="23-7" bind:tap="__dispatcher" class="rri-g-c flex-vertical flex-ai-c">
+                <image src="../img/icon/Rightarrow.png" class="rri-gc-icon"></image>
+                <label class="rri-gc-text">跳过</label>
+            </view>
+        </view>
+    </view>
+
+
+    <view wx:elif="{{ step==2 }}" data-wpy-evt="23-8" catch:tap="__dispatcher" class="rr-inner flex-vertical flex-ai-c flex-1 animate__fadeInUpBig">
+        <view class="rri-left-top flex-basic flex-jc-sb">
+            <image src="../img/icon/jurassic_last.png" data-wpy-evt="23-9" bind:tap="__dispatcher" class="rri-close-icon"></image>
+            <image src="../img/icon/aiqingyuehui.png" wx:if="{{ type == 'love' }}" class="rri-close-icon"></image>
+            <image src="../img/icon/caifu.png" wx:elif="{{ type == 'money' }}" class="rri-close-icon"></image>
+            <image src="../img/icon/gongzuo.png" wx:elif="{{ type == 'work' }}" class="rri-close-icon"></image>
+            <image src="../img/icon/wanju.png" wx:elif="{{ type == 'play' }}" class="rri-close-icon"></image>
+            <image src="../img/icon/sure.png" data-wpy-evt="23-10" bind:tap="__dispatcher" class="rri-close-icon"></image>
+        </view>
+        <label style="margin-top:2%;" class="rri-hint">这里可以记录具体的事情</label>
+        <view wx:if="{{ tab == 'tomorrow' }}" class="rri-date-hint flex-basic flex-jc-c">
+            <picker mode="time" value="{{remind2}}" start="00:00" end="23:59" wx:if="{{ !isPickedTime }}" data-wpy-evt="23-11" bind:change="__dispatcher">
+                <image src="../img/icon/no_choise.png" key="no_choice" class="rri-calender"></image>
+            </picker>
+            <image src="../img/icon/choised.png" wx:else key="choiced" data-wpy-evt="23-12" bind:tap="__dispatcher" class="rri-calender"></image>
+            <view wx:if="{{ !isPickedTime }}" class="rri-dh-text">需要到点提醒吗</view>
+            <view wx:else class="rri-dh-text">{{remind}}提醒您~</view>
+        </view>
+        <view class="rri-choise-center">
+            <view class="rri-choise-detail flex-basic flex-jc-c flex-wrap">
+                <view wx:for="{{ rcdConfig[type] }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" style=" {{ 'transform:' + (\'scale(\' + (item.selected?1.3:1) + \')\') + ';' }}" class="rcd-item flex-vertical flex-ai-c">
+                    <image src="{{  img_url + 'rcd/' + type + '/'+item.icon }}" data-wpy-evt="23-13" bind:tap="__dispatcher" data-wpytap-a="{{ item }}" class="rcd-icon"></image>
+                    <label class="rcd-text {{ [ item.selected ? 'shadow' : '' ] }}">{{item.name}}</label>
+                </view>
+            </view>
+            <view class="rri-write-annotation flex-basic flex-ai-c">
+                <input type="text" placeholder="添加注释" name id value="{{ text }}" bindinput="__dispatcher" data-model-id="0" class="rwa-input" /></view>
+        </view>
+        <view class="rri-write-sure flex-basic flex-jc-sb flex-ai-e">
+            <view style="width:70rpx;" class="rri-g-c flex-vertical flex-ai-c">
+                
+            </view>
+            <view data-wpy-evt="23-14" bind:tap="__dispatcher" class="rri-ws-item flex-vertical flex-ai-c">
+                <image src="../img/icon/sure.png" class="rwi-icon"></image>
+                <label class="rwi-text">保存</label>
+            </view>
+            <view data-wpy-evt="23-15" bind:tap="__dispatcher" class="rri-g-c flex-vertical flex-ai-c">
+                <image src="../img/icon/Rightarrow.png" class="rri-gc-icon"></image>
+                <label class="rri-gc-text">跳过</label>
+            </view>
+        </view>
+    </view>
+</view>

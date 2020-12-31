@@ -1,0 +1,75 @@
+
+<view style=" {{ 'padding-top:' + ((custom.top + 30) + \'rpx\') + ';' }}" class="mine-page">
+  
+  <bgAnimation bind_init="__initComponent" externalClasses="{{ 'star-info-bg' }}"></bgAnimation>
+  <view class="mp-top flex-vertical flex-jc-sb">
+    <image src="{{ img_url + 'stard/' + star.icon }}" wx:if="{{ star }}" class="mp-top-star"></image>
+    <view class="mp-header">
+      <view data-wpy-evt="41-0" bind:tap="__dispatcher" class="mph-content flex-vertical">
+        <view wx:if="{{ userInfo }}" class="mph-head flex-vertical flex-ai-c">
+          <image src="../img/icon/weidenglu-touxiang.png" class="mph-head-img"></image>
+          <view wx:if="{{ starBgByKey }}" class="mph-tag flex-basic flex-jc-c flex-ai-c">
+            <image src="{{ img_url + 'stard/' + starBgByKey }}" class="mph-tag-bg"></image>
+            <label wx:if="{{ userInfo }}" class="mph-t-text">{{starNameByKey}}</label>
+          </view>
+        </view>
+        <label wx:if="{{ userInfo && userInfo.nickname }}" class="mph-nickname ppp">{{userInfo.nickname}}</label>
+        <label wx:elif="{{ userInfo }}" class="mph-nickname ppp">{{userInfo.starName + userInfo.user_id}}</label>
+        <label wx:if="{{ userInfo && userInfo.showapi_res_body }}" class="mph-today-sign">{{starInfo.showapi_res_body['day'].day_notice}}</label>
+      </view>
+      <view data-wpy-evt="41-1" bind:tap="__dispatcher" class="mph-right-top">
+        <view class="mrt-number-wrapper flex-basic flex-ai-e">
+          <label wx:if="{{ userInfo }}" class="mrt-number">{{userInfo.remain_augury_num}}</label>
+          <label class="mrt-unit">次</label>
+          <image src="../img/icon/right.png" class="mrt-right-arrow"></image>
+        </view>
+        <view class="mrt-hint flex-basic flex-jc-c flex-ai-c">
+          <label class="mrt-hint-text">剩余测算</label>
+        </view>
+      </view>
+    </view>
+    <view class="mp-extra-tab flex-basic flex-jc-sb">
+      <view data-wpy-evt="41-2" bind:tap="__dispatcher" class="met-left flex-basic flex-ai-c flex-jc-c flex-1">
+        <view class="ml-btn flex-vertical flex-ai-c">
+          <image src="../img/card_img_3x.png" wx:if="{{ !daySignCard }}" class="ml-btn-card"></image>
+          <image src="{{ '../img/yunshi/'+daySignCard.es + '.jpg' }}" wx:else class="ml-btn-card {{ [ daySignCard.name.indexOf(\'逆\') > -1 ? 'isDown' : '' ] }}"></image>
+          <label class="ml-btn-text">今日塔罗</label>
+        </view>
+      </view>
+      <view data-wpy-evt="41-3" bind:tap="__dispatcher" class="met-right flex-basic flex-ai-c flex-jc-c flex-1">
+        <view class="ml-btn flex-vertical flex-ai-c">
+          <image src="../img/empress.jpg" class="ml-btn-card"></image>
+          <image src="../img/empress.jpg" class="ml-btn-card ab one"></image>
+          <image src="../img/justice.jpg" class="ml-btn-card ab two"></image>
+          <image src="../img/lovers.jpg" class="ml-btn-card ab three"></image>
+          <label class="ml-btn-text">塔罗预见</label>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="some-test">
+    <view class="some-test-title">热门测算</view>
+    <view class="some-test-wrapper">
+      <view wx:for="{{ hotAuguryList }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" data-wpy-evt="41-4" bind:tap="__dispatcher" data-wpytap-a="{{ item }}" class="some-test-item flex-basic flex-jc-sb">
+        <view class="some-test-left">
+          <image src="{{ item.hot_cover }}" class="some-test-img"></image>
+        </view>
+        <view class="some-test-right">
+          <view class="stt-wrapper">
+            <label class="some-test-t">{{item.hot_title}}</label>
+          </view>
+          <view class="std-wrapper">
+            <label class="some-test-desc">{{item.hot_desc}}</label>
+          </view>
+          <label class="some-test-num">已算 {{item.augury_num}}份</label>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+    <augury bind_init="__initComponent" d="{{ starInfo.d }}" tab="{{ 'augury' }}" originStep="{{ 1 }}" type="{{ 1 }}" wx:if="{{ showAuguryInput }}" data-wpy-evt="41-5" bind:closeRecord="__dispatcher"></augury>
+  
+  
+    <changeUserInfo bind_init="__initComponent" d="{{ starInfo.d }}" tab="{{ 'userInfo' }}" originStep="{{ 1 }}" type="{{ 1 }}" wx:if="{{ showChangeUserInfo }}" data-wpy-evt="41-6" bind:closeRecord="__dispatcher"></changeUserInfo>
+  
+</view>

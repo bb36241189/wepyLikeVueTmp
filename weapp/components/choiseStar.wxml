@@ -1,0 +1,14 @@
+
+<view data-wpy-evt="25-0" catch:tap="__dispatcher" class="choise-star flex-basic flex-jc-c flex-ai-c">
+  
+  <bgAnimation bind_init="__initComponent" externalClasses="{{ 'star-info-bg' }}"></bgAnimation>
+  <view data-wpy-evt="25-1" catch:tap="__dispatcher" class="choise-star-inner flex-basic flex-jc-sb flex-wrap flex-ai-st">
+    <view wx:for="{{ starConfig }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" data-wpy-evt="25-2" bind:tap="__dispatcher" data-wpytap-a="{{ item }}" class="star-icon flex-vertical flex-ai-c">
+      <view class="star-img-wrapper">
+        <image src="{{ img_url + 'stard/' + item.icon }}" class="star-img"></image>
+      </view>
+      <label class="star-name">{{ item.name }}</label>
+      <label class="star-time">{{ item.time }}</label>
+    </view>
+  </view>
+</view>

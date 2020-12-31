@@ -1,0 +1,238 @@
+<template>
+  <div class="my-app">
+    <routerView></routerView>
+    <div class="star-info-bottom flex-basic flex-jc-sa flex-ai-c" :style="{paddingBottom: (custom.bottom - 50 < 0?0:custom.bottom - 50) + 'rpx'}">
+      <div
+        class="sib-item flex-vertical flex-ai-c"
+        @tap="nowBottomTab = 'Fortune'"
+      >
+        <img
+          src="../img/bottom/_xingzuoyuncheng2.png"
+          class="sib-item-icon"
+          v-if="nowBottomTab == 'Fortune'"
+        />
+        <img
+          src="../img/bottom/_xingzuoyuncheng.png"
+          class="sib-item-icon"
+          v-else
+        />
+        <span class="sib-item-text" :class="{ high: nowBottomTab == 'Fortune' }"
+          >运势</span
+        >
+      </div>
+      <div
+        class="sib-item flex-vertical flex-ai-c"
+        @tap="nowBottomTab = 'Diary'"
+      >
+        <img
+          src="../img/bottom/kantanriji2.png"
+          class="sib-item-icon"
+          v-if="nowBottomTab == 'Diary'"
+        />
+        <img src="../img/bottom/kantanriji.png" class="sib-item-icon" v-else />
+        <span class="sib-item-text" :class="{ high: nowBottomTab == 'Diary' }"
+          >日记</span
+        >
+      </div>
+      <div
+        class="sib-item flex-vertical flex-ai-c"
+        @tap="nowBottomTab = 'Mine'"
+      >
+        <img
+          src="../img/bottom/daohanglan-052.png"
+          class="sib-item-icon"
+          v-if="nowBottomTab == 'Mine'"
+        />
+        <img
+          src="../img/bottom/daohanglan-05.png"
+          class="sib-item-icon"
+          v-else
+        />
+        <span class="sib-item-text" :class="{ high: nowBottomTab == 'Mine' }"
+          >我的</span
+        >
+      </div>
+    </div>
+     <div class="star-write-note flex-basic flex-jc-c flex-ai-c" v-if="!showRecord" @tap="openRecord">
+      <img src="../img/icon/combinedshapecopy2.png" class="swn-icon"/>
+    </div>
+    <HourMinute></HourMinute>
+    <yearMonthMate></yearMonthMate>
+    <LoginRegister v-if="showLogin" @closeMask="closeLogin"></LoginRegister>
+    <choiseStar v-if="isChangingStar" @closeMask="closeChoiceStar"></choiseStar>
+    <!-- <transition name="animate__fadeOutDownBig"> -->
+      <record :d="starInfo.d" :tab="nowTab" :edit-data="editData" v-if="showRecord" @closeRecord="closeRecord"></record>
+    <!-- </transition> -->
+  </div>
+</template>
+<style lang="less" type="text/css">
+@import "../style/flex-integrate.less";
+.my-app {
+  height: 100%;
+  overflow: hidden;
+}
+.star-info-bottom {
+  height: 88rpx;
+  border-top: 2rpx solid #a6a6a6;
+  /* padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom); */
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+  position: absolute;
+  bottom: 0rpx;
+  left: 0rpx;
+  right: 0rpx;
+  background: #f9f9f9;
+}
+.sib-item-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+.sib-item-text {
+  font-size: 16rpx;
+  color: #3d3d3d;
+}
+.sib-item-text.high {
+  color: #7647ce;
+}
+.star-write-note{
+  position:absolute;
+  bottom: 133rpx;
+  right: 20rpx;
+  width: 80rpx;
+  height: 80rpx;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 39rpx #000000;
+}
+.swn-icon{
+  width: 38rpx;
+  height: 38rpx;
+}
+</style>
+<script>
+import apiService from '../js/apiService'
+import CommonEnv from '../js/class/CommonEnv';
+import wepy from '@wepy/core';
+import testMixin from '../mixins/test';
+wepy.component( {
+  mixins: [testMixin],
+  data:{
+      nowBottomTab: "", //Diary,Mine
+      showLogin: false,
+      editData: null,
+      isChangingStar: false,
+      showRecord: false
+    },
+  
+  watch: {
+    nowBottomTab(v) {
+      if (v == "Fortune" && this.$route.path != "/starInfo") {
+        this.$router.push({path: "/starInfo"});
+      } else if (v == "Diary" && this.$route.path != "/notes") {
+        this.$router.push({path: "/notes"});
+      } else if (v == "Mine" && this.$route.path != "/mine") {
+        this.$router.push({path: '/mine'});
+      }
+    },
+    $route(to,from){
+        if(to.path == '/starInfo'){
+            this.nowBottomTab = 'Fortune';
+        }else if(to.path == '/notes'){
+            this.nowBottomTab = 'Diary';
+        }else if(to.path == '/mine'){
+            this.nowBottomTab = 'Mine';
+        }
+    }
+  },
+  computed: {
+    nowTab(){
+      return this.$store.state.nowTab;
+    },
+    starInfo(){
+      return this.$store.state.starInfo;
+    }
+  },
+  methods: {
+    goLogin() {
+      apiService
+        .starLoginWxMiniPro(this.$store.state.cStar.key)
+        .then((ret) => {
+          if (ret) {
+            // CommonEnv.toast('登录成功!');
+            this.$store.commit("changeUserInfo", ret);
+            apiService.token = ret.token;
+            wx.setStorageSync('token',apiService.token);
+          } else {
+            return Promise.reject({msg: 'login lost'});
+          }
+        })
+        .catch((e) => {
+          if (e.code == "102") {
+            CommonEnv.toast("验证码错误");
+          }else{
+            console.error(e);
+          }
+        });
+    },
+    openRecord(){
+      this.showRecord = true;
+    },
+    closeRecord(){
+      this.showRecord = false;
+      this.editData = null;
+    },
+    closeChoiceStar(){
+      this.isChangingStar = false;
+    },
+    closeLogin(isOk){
+      if(!isOk){
+        // this.$router.push({path: "/starInfo"});
+        this.nowBottomTab = 'Fortune';
+      }
+      this.showLogin = false;
+    }
+  },
+  onShow() {
+    // this.BUS.$emit('openPickerDate');
+    this.nowBottomTab = 'Fortune';
+  },
+  created() {
+    if(!wx.getStorageSync('cStar')){
+      this.isChangingStar = true;
+    }else{
+      console.log(wx.getStorageSync('cStar'));
+      this.$store.commit('changeCStar',JSON.parse(wx.getStorageSync('cStar')));
+      let starkey = this.$store.state.cStar.key;
+      this.$store.dispatch('loadStarInfo',starkey); 
+    }
+    if(wx.getStorageSync('token')){
+      this.$store.dispatch('login');
+    }
+    this.BUS.$on('changingStar',() => {
+      this.isChangingStar = true;
+    });
+    this.BUS.$on('editNote',editData => {
+      this.editData = editData;
+      console.log('$on:editNote',this.editData);
+      this.openRecord();
+    })
+    this.BUS.$on('openLogin',() => {
+      this.goLogin();
+      // this.showLogin = true;
+    })
+  },
+});
+</script>
+<config>
+{
+    usingComponents: {
+      HourMinute:'~@/components/HourMinute.wpy',
+      YearMonthDate:'~@/components/YearMonthDate.wpy',
+      record:'~@/components/record.wpy',
+      LoginRegister:'~@/components/LoginRegister.wpy',
+      choiseStar:'~@/components/choiseStar.wpy',
+      routerView: '~@/router/routerView.wpy'
+    }
+}
+</config>

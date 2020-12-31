@@ -1,0 +1,7 @@
+
+<view class="router-view">
+    <auguryIntro bind_init="__initComponent" wx:if="{{ currentRoute == '/auguryIntro' }}"></auguryIntro>
+    <mine bind_init="__initComponent" wx:elif="{{ currentRoute == '/mine' }}"></mine>
+    <notes bind_init="__initComponent" wx:elif="{{ currentRoute == '/notes' }}"></notes>
+    <starInfo bind_init="__initComponent" wx:elif="{{ currentRoute == '/starInfo' }}"></starInfo>
+</view>

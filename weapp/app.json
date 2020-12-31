@@ -1,0 +1,14 @@
+{
+    "pages": [
+        "pages/App",
+        "pages/web"
+    ],
+    "window": {
+        "navigationStyle": "custom",
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#1E1D25",
+        "navigationBarTitleText": "萝卜占星记",
+        "navigationBarTextStyle": "white"
+    },
+    "usingComponents": {}
+}

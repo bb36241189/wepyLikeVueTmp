@@ -1,0 +1,12 @@
+
+<view class="augury-intro">
+    <bgAnimation bind_init="__initComponent" externalClasses="{{ 'star-info-bg' }}"></bgAnimation>
+    <view class="augury-intro-content">
+        <view class="aic-section flex-vertical">
+            <label class="aic-bigtitle">测算相关声明</label>
+            <label class="aic-title">测算剩余次数</label>
+            <label class="aic-desc">&nbsp;&nbsp;测算剩余次数是指，还剩下的可以塔罗解读的次数，这个次数在每次塔罗解读的时候会产生消耗。假如次数为零，将无法进行塔罗测算。目前可以获得测算次数的唯一途径就是写日记喔~</label>
+        </view>
+        <image src="../img/icon/close.png" data-wpy-evt="40-0" bind:tap="__dispatcher" class="ai-close-icon"></image>
+    </view>
+</view>

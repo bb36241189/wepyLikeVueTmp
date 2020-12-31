@@ -1,0 +1,10 @@
+{
+    "component": true,
+    "usingComponents": {
+        "bgAnimation": "./../components/bgAnimation",
+        "auguryIntro": "./../views/auguryIntro",
+        "mine": "./../views/mine",
+        "notes": "./../views/notes",
+        "starInfo": "./../views/starInfo"
+    }
+}

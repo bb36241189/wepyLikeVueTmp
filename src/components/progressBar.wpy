@@ -1,0 +1,53 @@
+<template>
+    <div class="progress-bar">
+        <div class="progress-bar-inner flex-basic flex-jc-e" :style="{width: realPercent,background:color}">
+            <span class="progress-text">{{realPercent}}</span>
+        </div>
+    </div>
+</template>
+<style lang="less">
+@import "../style/flex-integrate.less";
+.progress-bar{
+    height: 25rpx;
+    width: 148rpx;
+    border-radius: 12rpx;
+    background: #eaeaea;
+}
+.progress-bar-inner{
+    height: 100%;
+    border-radius: 12rpx;
+}
+.progress-text{
+    font-size: 16rpx;
+    color: white;
+    margin-right: 5rpx;
+}
+</style>
+<script>
+import wepy from '@wepy/core';
+import testMixin from '../mixins/test';
+wepy.component( {
+    mixins: [testMixin],
+  props: ["percent","color"],
+  data:{
+    },
+  computed: {
+      realPercent(){
+          if(this.percent){
+              return this.percent.replace('分','%')
+          }else{
+              return '0%';
+          }
+      }
+  },
+  methods: {
+    
+  },
+  created() {
+   
+  },
+  onShow(){
+
+  }
+});
+</script>

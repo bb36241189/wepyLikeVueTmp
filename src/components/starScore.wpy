@@ -1,0 +1,38 @@
+<template>
+    <div class="star-score flex-basic flex-jc-s">
+        <div class="star-bar" v-for="(item,index) in [1,2,3,4,5]" :key="index">
+            <img src="../img/star_blue.png" v-if="item <= score && color=='blue'" class="star-index" />
+            <img src="../img/star_red.png" v-else-if="item <= score && color=='red'" class="star-index" />
+            <img src="../img/star_yellow.png" v-else-if="item <= score && color=='yellow'" class="star-index" />
+            <img src="../img/star_gray.png" v-else-if="item > score" class="star-index" />
+        </div>
+    </div>
+</template>
+<style lang="less">
+@import "../style/flex-integrate.less";
+.star-index{
+  height: 28rpx;
+  width: 28rpx;
+}
+</style>
+<script>
+import wepy from '@wepy/core';
+import testMixin from '../mixins/test';
+wepy.component( {
+    mixins: [testMixin],
+  props: ["score","color"],
+  data:{
+    },
+  computed: {
+  },
+  methods: {
+    
+  },
+  created() {
+   
+  },
+  onShow(){
+
+  }
+});
+</script>

@@ -1,0 +1,9 @@
+{
+    "component": true,
+    "usingComponents": {
+        "bgAnimation": "./../components/bgAnimation",
+        "choiseStar": "./../components/choiseStar",
+        "starScore": "./../components/starScore",
+        "progressBar": "./../components/progressBar"
+    }
+}

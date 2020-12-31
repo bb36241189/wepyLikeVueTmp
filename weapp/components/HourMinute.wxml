@@ -1,0 +1,8 @@
+
+<view>
+  <picker mode="time" value="{{time}}" start="09:01" end="21:01" wx:if="{{ popupVisible }}" data-wpy-evt="21-0" bind:change="__dispatcher">
+    <view class="picker">
+      当前选择: {{time}}
+    </view>
+  </picker>
+</view>

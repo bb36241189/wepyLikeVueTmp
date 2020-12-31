@@ -1,0 +1,8 @@
+{
+    "component": true,
+    "usingComponents": {
+        "bgAnimation": "./../components/bgAnimation",
+        "augury": "./../components/augury",
+        "changeUserInfo": "./../components/changeUserInfo"
+    }
+}

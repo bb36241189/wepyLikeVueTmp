@@ -1,0 +1,40 @@
+
+<view data-wpy-evt="42-0" bind:scroll="__dispatcher" class="notes-list">
+    
+    <bgAnimation bind_init="__initComponent" externalClasses="{{ 'star-info-bg' }}"></bgAnimation>
+    <view style=" {{ 'padding-top:' + ((custom.top) + \'rpx\') + ';' }}" class="note-header flex-basic flex-jc-c {{ [ goTop ? 'goTop' : '' ] }}">
+        <view class="nh-center flex-basic flex-jc-sb flex-ai-c">
+            <image src="../img/icon/icon-left.png" data-wpy-evt="42-1" bind:tap="__dispatcher" class="nhc-left-icon"></image>
+            <label wx:if="{{ dateSection }}" class="nhc-center-text {{ [ goTop ? 'goTop' : '' ] }}">{{getCurrMonthFormat}}</label>
+            <image src="../img/icon/Arrowrightnext.png" data-wpy-evt="42-2" bind:tap="__dispatcher" class="nhc-right-icon"></image>
+        </view>
+    </view>
+    <view style=" {{ 'padding-top:' + ((custom.top + 146) + \'rpx\') + ';' }}" class="notes-wrapper">
+        <view wx:for="{{ notes }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" data-wpy-evt="42-3" bind:tap="__dispatcher" data-wpytap-a="{{ item }}" class="note-item flex-basic flex-jc-s {{ [ item.tab == \'augury\' ? 'gradient' : '' ] }}">
+            <view class="note-item-type flex-basic flex-jc-e">
+                <image src="../img/icon/aiqingyuehui.png" wx:if="{{ item.type == 'love' }}" class="note-item-typeimg"></image>
+                <image src="../img/icon/caifu.png" wx:elif="{{ item.type == 'money' }}" class="note-item-typeimg"></image>
+                <image src="../img/icon/gongzuo.png" wx:elif="{{ item.type == 'work' }}" class="note-item-typeimg"></image>
+                <image src="../img/icon/wanju.png" wx:elif="{{ item.type == 'play' }}" class="note-item-typeimg"></image>
+            </view>
+            <view class="note-item-content">
+                <label class="nic-datetime {{ [ item.notice ? 'high' : '' ] }}">{{item.noticetimeFormat || item.datatime}}</label>
+                <view class="nic-tag-wrapper flex-basic flex-jc-s flex-ai-c flex-wrap">
+                    <view wx:for="{{ item.tags }}" wx:for-index="tagIndex" wx:for-item="tagItem" wx:key="tagIndex" key="{{ tagIndex }}" class="nt-item flex-basic flex-jc-c flex-ai-c">
+                        <image wx:if="{{ item.tab == 'augury' }}" src="{{ img_url + 'rcd2/' + item.type +'/' + tagItem.icon }}" class="nt-item-icon"></image>
+                        <image wx:else src="{{ img_url + 'rcd/' + item.type +'/' + tagItem.icon }}" class="nt-item-icon"></image>
+                        <label class="nt-item-name">{{tagItem.name}}</label>
+                        <view wx:if="{{ tagIndex < item.tags.length - 1 }}" class="nt-item-circle"></view>
+                    </view>
+                </view>
+                <label wx:if="{{ item.text }}" class="nic-note">{{item.text}}</label>
+            </view>
+            <view data-wpy-evt="42-4" catch:tap="__dispatcher" data-wpytap-a="{{ item }}" data-wpytap-b="{{ index }}" class="note-item-downarrow">
+                <image src="../img/icon/downarrowbtn.png" style=" {{ 'opacity:' + (item.tab == \'augury\'?0.5:0.5) + ';' }}" class="nid-img"></image>
+            </view>
+        </view>
+    </view>
+    
+        <bottomPopBtn bind_init="__initComponent" wx:if="{{ showBottomPop }}" shade1="{{ {text:'删除',color: '#bc4455'} }}" item="{{ notes[nowHandleIndex] }}" shade2="{{ {text: '编辑',color: '#4cb291'} }}" cancel="{{ {text: '取消',color: '#53ab8e'} }}" data-wpy-evt="42-5" bind:closePop="__dispatcher" bind:deleted="__dispatcher" bind:editedNote="__dispatcher"></bottomPopBtn>
+    
+</view>

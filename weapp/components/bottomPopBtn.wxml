@@ -1,0 +1,14 @@
+
+<view data-wpy-evt="62-0" bind:tap="__dispatcher" class="bottom-pop-btn flex-vertical flex-jc-e flex-ai-c">
+    <view data-wpy-evt="62-1" catch:tap="__dispatcher" class="bpb-wrapper">
+        <view data-wpy-evt="62-2" bind:tap="__dispatcher" class="bpb-shade-line flex-basic flex-jc-c flex-ai-c">
+            <label style=" {{ 'color:' + (shade1.color) + ';' }}" class="bsl-text">{{shade1.text}}</label>
+        </view>
+        <view wx:if="{{ item.tab !== 'augury' }}" data-wpy-evt="62-3" bind:tap="__dispatcher" style="border-top:2rpx solid #c4cdcc;" class="bpb-shade-line flex-basic flex-jc-c flex-ai-c">
+            <label style=" {{ 'color:' + (shade2.color) + ';' }}" class="bsl-text">{{shade2.text}}</label>
+        </view>
+    </view>
+    <view data-wpy-evt="62-4" bind:tap="__dispatcher" class="bpb-cancel-line flex-basic flex-ai-c flex-jc-c">
+        <label style=" {{ 'color:' + (cancel.color) + ';' }}" class="bcl-text">{{cancel.text}}</label>
+    </view>
+</view>

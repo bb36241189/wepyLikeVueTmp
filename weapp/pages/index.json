@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "choiseStar": "./../components/choiseStar"
+    }
+}

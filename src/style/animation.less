@@ -1,0 +1,159 @@
+@-webkit-keyframes fadeIn {
+    from {
+      opacity: 0.3;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0.3;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  .animate__fadeIn {
+    -webkit-animation: fadeIn 2s linear;
+    animation: fadeIn 2s linear;
+  }
+
+  @-webkit-keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0.3;
+    }
+  }
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0.3;
+    }
+  }
+  .animate__fadeOut {
+    -webkit-animation: fadeOut 2s linear;
+    animation: fadeOut 2s linear;
+  }
+  @-webkit-keyframes zoomIn {
+    from {
+      opacity: 1;
+      -webkit-transform: scale3d(0.9, 0.9, 0.9);
+      transform: scale3d(0.9, 0.9, 0.9);
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes zoomIn {
+    from {
+      opacity: 1;
+      -webkit-transform: scale3d(0.9, 0.9, 0.9);
+      transform: scale3d(0.9, 0.9, 0.9);
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  .animate__zoomIn {
+    -webkit-animation: zoomIn 2s linear;
+    animation: zoomIn 2s linear;
+  }
+  /* Zooming exits */
+  @-webkit-keyframes zoomOut {
+    from {
+      opacity: 1;
+    }
+  
+    50% {
+      opacity: 1;
+      -webkit-transform: scale3d(0.9, 0.9, 0.9);
+      transform: scale3d(0.9, 0.9, 0.9);
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes zoomOut {
+    from {
+      opacity: 1;
+    }
+  
+    50%  {
+      opacity: 1;
+      -webkit-transform: scale3d(0.9, 0.9, 0.9);
+      transform: scale3d(0.9, 0.9, 0.9);
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+  .animate__zoomOut {
+    -webkit-animation: zoomOut 2s infinite;
+    animation: zoomOut 2s infinite;
+  }
+
+  /* rotate */
+  @-webkit-keyframes rotateIn {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      transform: rotateY(180deg);
+    }
+  }
+  @keyframes rotateIn {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      transform: rotateY(180deg);
+    }
+  }
+  .animate__rotateIn {
+    -webkit-animation: rotateIn 1s linear;
+    animation: rotateIn 1s linear;
+  }
+
+
+
+  @-webkit-keyframes zoomBigIn {
+    from {
+      opacity: 0;
+      -webkit-transform: scale3d(0.5, 0.5, 0.5);
+      transform: scale3d(0.5, 0.5, 0.5);
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes zoomBigIn {
+    from {
+      opacity: 0;
+      -webkit-transform: scale3d(0.5, 0.5, 0.5);
+      transform: scale3d(0.5, 0.5, 0.5);
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  .animate__zoomBigIn {
+    -webkit-animation: zoomBigIn 1s linear;
+    animation: zoomBigIn 1s linear;
+  }

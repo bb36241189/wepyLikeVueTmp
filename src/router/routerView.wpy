@@ -1,0 +1,41 @@
+<template>
+    <div class="router-view">
+        <auguryIntro v-if="currentRoute == '/auguryIntro'"></auguryIntro>
+    </div>
+</template>
+<style lang="less" type="text/css">
+@import '../style/flex-integrate.less';
+.router-view{
+    height: 100%;
+}
+</style>
+<script>
+import wepy from '@wepy/core';
+import testMixin from '../mixins/test';
+wepy.component({
+    mixins: [testMixin],
+    data: {
+        currentRoute:''
+    },
+    methods: {
+    },
+    watch: {
+        '$route.path'(v){
+            console.log('watch:$router',v);
+            this.currentRoute = v;
+        }
+    },
+    created(){
+        console.log('routerView:created',this.$router);
+        this.$router.push('/starInfo')
+    }
+});
+</script>
+<config>
+{
+    usingComponents: {
+        bgAnimation:"~@/components/bgAnimation.wpy",
+        auguryIntro: "~@/views/auguryIntro.wpy"
+    }
+}
+</config>

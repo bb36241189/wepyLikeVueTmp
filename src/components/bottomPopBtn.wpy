@@ -1,0 +1,85 @@
+<template>
+    <div class="bottom-pop-btn flex-vertical flex-jc-e flex-ai-c" @tap="closePop">
+        <div class="bpb-wrapper" @tap.stop="">
+            <div class="bpb-shade-line flex-basic flex-jc-c flex-ai-c" @tap="deleteNote">
+                <span class="bsl-text" :style="{color: shade1.color}">{{shade1.text}}</span>
+            </div>
+            <div v-if="item.tab !== 'augury'" class="bpb-shade-line flex-basic flex-jc-c flex-ai-c" @tap="editNote" style="border-top:2rpx solid #c4cdcc;">
+                <span class="bsl-text" :style="{color: shade2.color}">{{shade2.text}}</span>
+            </div>
+        </div>
+        <div class="bpb-cancel-line flex-basic flex-ai-c flex-jc-c" @tap="closePop">
+            <span class="bcl-text" :style="{color: cancel.color}">{{cancel.text}}</span>
+        </div>
+    </div>
+</template>
+<style lang="less">
+@import "../style/flex-integrate.less";
+.bottom-pop-btn {
+    top: 0rpx;
+    left: 0rpx;
+    right: 0rpx;
+    bottom: 0rpx;
+    position: fixed;
+    background: rgba(0,0,0,0.8);
+    z-index: 2;
+}
+.bpb-wrapper{
+    border-radius: 20rpx;
+    overflow: hidden;
+}
+.bpb-shade-line {
+    height: 104rpx;
+    width: 722rpx;
+    background: rgba(255,255,255,0.7);
+}
+.bpb-cancel-line{
+    margin-top: 14rpx;
+    margin-bottom: 60rpx;
+    border-radius: 20rpx;
+    height: 105rpx;
+    width: 722rpx;
+    background: rgb(255,255,255);
+}
+</style>
+<script>
+import apiService from '../js/apiService';
+import testMixin from '../mixins/test';
+import wepy from '@wepy/core';
+wepy.component( {
+  props: ["shade1","shade2","cancel","item"],
+    mixins: [testMixin],
+  data:{
+      a: 1
+    },
+  computed: {
+  },
+  methods: {
+      closePop(){
+          this.$emit('closePop');
+      },
+      deleteNote(){
+          apiService.deleteNote(this.item.note_id,this.item.tab).then(ret => {
+              this.$emit('deleted')
+          }).catch(e => {
+              console.error(e);
+          })
+      },
+      editNote(){
+          this.BUS.$emit('editNote',this.item);
+          this.BUS.$on('editedNote',(data) => {
+              this.$emit('editedNote',data);
+              this.closePop();
+              this.BUS.$off('editedNote')
+          })
+        //   this.closePop();
+      }
+  },
+  created() {
+   console.log('bottomPopBtn');
+  },
+  onShow(){
+
+  }
+});
+</script>

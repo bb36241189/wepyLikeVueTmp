@@ -1,0 +1,8 @@
+
+<view class="bg-animation {{ externalClasses}}">
+    <view class="ba-inner">
+        <image src="../img/universe_bg2.png" class="star-info-bg"></image>
+        <image src="../img/meteor.png" style=" {{ 'left:' + (meteorPosition.x + \'rpx\') + ';' + 'top:' + (meteorPosition.y +\'rpx\') + ';' }}" class="metetor-img"></image>
+        <image src="../img/star.png" wx:for="{{ stars }}" wx:for-index="index" wx:for-item="item" wx:key="index" key="{{ index }}" style=" {{ 'opacity:' + (item.opacity) + ';' + 'left:' + (item.x + \'rpx\') + ';' + 'top:' + (item.y +\'rpx\') + ';' + 'width:' + (item.width + \'rem\') + ';' + 'height:' + (item.height + \'rem\') + ';' }}" class="star-img"></image>
+    </view>
+</view>

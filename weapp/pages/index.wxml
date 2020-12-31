@@ -1,0 +1,4 @@
+
+<view data-wpy-evt="5-0" catch:touchmove="__dispatcher" style="overflow:hidden;" class="container index-page flex-vertical flex-ai-s flex-1">
+  <choiseStar bind_init="__initComponent"></choiseStar>
+</view>

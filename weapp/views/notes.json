@@ -1,0 +1,8 @@
+{
+    "component": true,
+    "usingComponents": {
+        "choiseStar": "./../components/choiseStar",
+        "bgAnimation": "./../components/bgAnimation",
+        "bottomPopBtn": "./../components/bottomPopBtn"
+    }
+}

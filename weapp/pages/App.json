@@ -1,0 +1,11 @@
+{
+    "component": true,
+    "usingComponents": {
+        "routerView": "./../router/routerView",
+        "HourMinute": "./../components/HourMinute",
+        "YearMonthDate": "./../components/YearMonthDate",
+        "record": "./../components/record",
+        "LoginRegister": "./../components/LoginRegister",
+        "choiseStar": "./../components/choiseStar"
+    }
+}
